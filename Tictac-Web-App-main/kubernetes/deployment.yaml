@@ -17,7 +17,7 @@ spec:
         - name: ecr-secret
       containers:
       - name: tictac
-        image: 116981802760.dkr.ecr.ap-south-1.amazonaws.com/tictac:latest  # Ensure correct region
+        image: dilipopseng/tictac:22
         imagePullPolicy: Always
         ports:
         - containerPort: 80
