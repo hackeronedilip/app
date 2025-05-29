@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tictac-app
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tictac
+  template:
+    metadata:
+      labels:
+        app: tictac
+    spec:
+      imagePullSecrets:
+        - name: ecr-secret
+      containers:
+      - name: tictac
+        image: 116981802760.dkr.ecr.ap-south-1.amazonaws.com/tictac:latest  # Ensure correct region
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+
+        ###
