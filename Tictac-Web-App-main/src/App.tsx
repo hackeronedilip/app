@@ -99,7 +99,7 @@ function App() {
         <div className="p-6 bg-indigo-600 text-white text-center">
           <h1 className="text-3xl font-bold flex items-center justify-center gap-2">
             <Award className="h-8 w-8" />
-            Sanjay Web Application new Version
+            Devops Tic-Tac-Toe App
           </h1>
           <p className="text-indigo-200 mt-1">A classic game reimagined</p>
         </div>
@@ -117,7 +117,7 @@ function App() {
               winningLine={winningLine}
             />
             
-            
+
             <div className="mt-6 flex gap-4">
               <button 
                 onClick={resetGame}
