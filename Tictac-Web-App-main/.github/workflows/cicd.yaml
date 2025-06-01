@@ -1,0 +1,48 @@
+name: Youtube CI/CD Pipeline
+permissions:
+  security-events: write
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code From Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set Up Node Environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install Dependencies
+        run: npm install
+      - name: Install SonarQube Scanner
+        run: |
+          curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          unzip sonar-scanner.zip -d /opt
+          echo "/opt/sonar-scanner-4.6.2.2472-linux/bin" >> $GITHUB_PATH
+      - name: Run SonarQube Scanner with Debugging
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=Youtube-App1 \
+            -Dsonar.sources=. \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.verbose=true
+      - name: Set Image Tag from Commit SHA
+        run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
+      - name: Build Docker Image
+        run: docker build -t dilipopseng/tictac:${IMAGE_TAG} .
+      - name: Run Trivy Docker Image Scan
+        run: |
+          trivy image --exit-code 1 --severity HIGH,CRITICAL dilipopseng/tictac:${IMAGE_TAG} || true
+      - name: Push Docker Image to Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker push dilipopseng/tictac:${IMAGE_TAG}
+      - name: Replace image name in Kubernetes manifest
+        run: |
+          sed -i "s|image: dilipopseng/tictac:.*|image: dilipopseng/tictac:${IMAGE_TAG}|g" kube/deployment.yml
