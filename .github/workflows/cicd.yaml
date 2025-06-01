@@ -45,4 +45,4 @@ jobs:
           docker push dilipopseng/tictac:${IMAGE_TAG}
       - name: Replace image name in Kubernetes manifest
         run: |
-          sed -i "s|image: dilipopseng/tictac:.*|image: dilipopseng/tictac:${IMAGE_TAG}|g" kube/deployment.yml
+          sed -i "s|image: dilipopseng/tictac:.*|image: dilipopseng/tictac:${IMAGE_TAG}|g" kubernetes/deployment.yml
