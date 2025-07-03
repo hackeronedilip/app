@@ -19,5 +19,5 @@ EXPOSE 3000
 # Run tests first (optional, you can remove if you run tests separately)
 RUN npm test
 
-# Start app
+# Start app sdsd sdsd sd sds dsds dsdsd sds
 CMD ["npm", "start"]
