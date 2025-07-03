@@ -4,7 +4,7 @@ FROM node:18-alpine
 # Create app directory sdssdsd sdsdsds
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json dsdsdsdsdds
 COPY package*.json ./
 
 # Install dependencies
