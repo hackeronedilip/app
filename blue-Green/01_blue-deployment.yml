@@ -21,4 +21,4 @@ spec:
           image: dilipopseng/tictac:13
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 80
