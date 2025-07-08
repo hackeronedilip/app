@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javawebappgreendeployment
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: java-web-app
+      version: green
+  template:
+    metadata:
+      name: javawebapppod
+      labels:
+        app: java-web-app
+        version: green
+    spec:
+      containers:
+        - name: javawebappcontainer
+          image: dilipopseng/greenrepo:v2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
