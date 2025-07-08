@@ -1,25 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: javawebappbluedeployment
+  name: tictac-blue-deployment
 spec:
   replicas: 2
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: java-web-app
+      app: tic-tac-app
       version: blue
   template:
     metadata:
-      name: javawebapppod
       labels:
-        app: java-web-app
+        app: tic-tac-app
         version: blue
     spec:
       containers:
-        - name: javawebappcontainer
-          image: dilipopseng/bluedeployment:v1.1
+        - name: tic-tac-container
+          image: dilipopseng/tictac:13
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8080
