@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javawebappbluedeployment
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: java-web-app
+      version: blue
+  template:
+    metadata:
+      name: javawebapppod
+      labels:
+        app: java-web-app
+        version: blue
+    spec:
+      containers:
+        - name: javawebappcontainer
+          image: dilipopseng/bluedeployment:v1.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
