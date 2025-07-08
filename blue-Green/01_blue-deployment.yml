@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: javawebappcontainer
-          image: dilipopseng/bluedeployment:v1.1
+          image: dilipopseng/bluedeployment:13
           imagePullPolicy: Always
           ports:
             - containerPort: 80
