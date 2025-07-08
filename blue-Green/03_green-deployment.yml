@@ -1,25 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: javawebappgreendeployment
+  name: tictac-green-deployment
 spec:
   replicas: 2
   strategy:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: java-web-app
+      app: tic-tac-app
       version: green
   template:
     metadata:
-      name: javawebapppod
       labels:
-        app: java-web-app
+        app: tic-tac-app
         version: green
     spec:
       containers:
-        - name: javawebappcontainer
-          image: dilipopseng/greenrepo:v2
+        - name: tic-tac-container
+          image: dilipopseng/titacapp:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 8080
