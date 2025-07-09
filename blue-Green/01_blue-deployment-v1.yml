@@ -9,12 +9,12 @@ spec:
   selector:
     matchLabels:
       app: tic-tac-app
-      version: {{VERSION}}
+      version: {? {VERSION: ''} : ''}
   template:
     metadata:
       labels:
         app: tic-tac-app
-        version: {{VERSION}}
+        version: {? {VERSION: ''} : ''}
     spec:
       containers:
         - name: tic-tac-container
