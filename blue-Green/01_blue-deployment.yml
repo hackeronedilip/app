@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tictac-blue-deployment
+  name: tictac-{{VERSION}}-deployment
 spec:
   replicas: 2
   strategy:
@@ -9,16 +9,16 @@ spec:
   selector:
     matchLabels:
       app: tic-tac-app
-      version: blue
+      version: {? {VERSION: ''} : ''}
   template:
     metadata:
       labels:
         app: tic-tac-app
-        version: blue
+        version: {? {VERSION: ''} : ''}
     spec:
       containers:
         - name: tic-tac-container
-          image: dilipopseng/tictac:13
+          image: blue-green-deploy:{{IMAGE_TAG}}
           imagePullPolicy: Always
           ports:
             - containerPort: 80
