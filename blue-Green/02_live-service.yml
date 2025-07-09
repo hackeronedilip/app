@@ -6,7 +6,7 @@ spec:
   type: LoadBalancer
   selector:
     app: tic-tac-app
-    version: {? {VERSION: ''} : ''}
+    version: {{VERSION}}
   ports:
     - port: 80
       targetPort: 80
