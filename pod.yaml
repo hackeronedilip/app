@@ -1,0 +1,12 @@
+apiVersion: v1
+Kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+    - name: nginx-container
+      image: 690109731501.dkr.ecr.us-east-1.amazonaws.com/tictacappnew:v1.1
+      ports:
+        - containerPort: 80
