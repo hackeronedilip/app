@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tictac-green-deployment
+  name: tictac-test-deployment
 spec:
   replicas: 2
   strategy:
@@ -9,16 +9,16 @@ spec:
   selector:
     matchLabels:
       app: tic-tac-app
-      version: green
+      version: v1
   template:
     metadata:
       labels:
         app: tic-tac-app
-        version: green
+        version: v1
     spec:
       containers:
         - name: tic-tac-container
-          image: dilipopseng/titacapp:latest
+          image: blue-green-deploy:v1.1
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 80

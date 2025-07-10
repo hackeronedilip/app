@@ -9,16 +9,16 @@ spec:
   selector:
     matchLabels:
       app: tic-tac-app
-      version: {{VERSION}}
+      version: {? {VERSION: ''} : ''}
   template:
     metadata:
       labels:
         app: tic-tac-app
-        version: {{VERSION}}
+        version: {? {VERSION: ''} : ''}
     spec:
       containers:
         - name: tic-tac-container
-          image: blue-green-deploy:{{IMAGE_TAG}}
+          image: 690109731501.dkr.ecr.us-east-1.amazonaws.com:{{IMAGE_TAG}}
           imagePullPolicy: Always
           ports:
             - containerPort: 80

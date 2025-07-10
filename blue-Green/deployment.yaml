@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tictac-deployment
+  namespace: dev
+  labels:
+    app: tic-tac-app
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: tic-tac-app
+  template:
+    metadata:
+      labels:
+        app: tic-tac-app
+  spec:
+    containers:
+      - name: tic-tac-container
+        image: 690109731501.dkr.ecr.us-east-1.amazonaws.com/blue-green-deploy:latest
+        ports:
+          - containerPort: 80
